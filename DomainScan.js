@@ -1,8 +1,8 @@
 /** Search Tab **/
 
-Tabs.DomainScan = {
+Tabs.Search = {
 	tabOrder: 2020,
-	tabLabel: 'Search',
+	tabLabel: 'Domain Scan',
 	myDiv: null,
 	MapAjax : new CMapAjax(),
 	MAX_SHOW_WHILE_RUNNING : 500,
