@@ -199,7 +199,7 @@ Tabs.DomainScan = {
 	},
 
 	onUnload : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var numRows = t.mapDat.length;
 		if (numRows > 0){
 			for (var i=0; i<numRows; i++){
@@ -214,7 +214,7 @@ Tabs.DomainScan = {
 	},
 
 	EverySecond : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		t.LoopCounter = t.LoopCounter + 1;
 		if (FFVersion.Browser=="Chrome" && (t.LoopCounter%15==0)) {
 			t.onUnload();
@@ -222,7 +222,7 @@ Tabs.DomainScan = {
 	},
 
 	searchClickSort : function (e) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var newColNum = e.id.substr(9);
 		ById('SearchCol' + Options.SearchOptions.sortColNum).className = 'buttonv2 std blue';
 		e.className = 'buttonv2 std green';
@@ -233,7 +233,7 @@ Tabs.DomainScan = {
 	},
 
 	searchquickmarch : function (x,y) {
-		QuickMarch.MapClick(x,y,Cities.byID[Tabs.Search.ModelCityId].idx);
+		QuickMarch.MapClick(x,y,Cities.byID[Tabs.DomainScan.ModelCityId].idx);
 	},
 
 	e_coordChange : function(){
@@ -241,7 +241,7 @@ Tabs.DomainScan = {
 	},
 
 	setSlice : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var prov = ById('pbSearchProvince');
 		if (prov.value != 0) {
 			var numslices = ById('pbProvinceSlices').value;
@@ -277,20 +277,20 @@ Tabs.DomainScan = {
 	},
 
 	citySelNotify : function (city,x,y){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (city) {
 			t.ModelCityId = city.id;
 		}
 	},
 
 	saveoldmists : function (){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var serverID = getServerId();
 		setTimeout(function () { GM_setValue ('OldMists_'+serverID+'_'+uW.tvuid, JSON2.stringify(t.OldMists)); },0); // get around GM_SetValue uW error
 	},
 
 	readoldmists : function (notify) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var serverID = getServerId();
 		var l = JSON2.parse(GM_getValue ('OldMists_'+getServerId()+'_'+uW.tvuid, '[]'));
 		if (matTypeof(l) == 'array') { t.OldMists = l; }
@@ -298,19 +298,19 @@ Tabs.DomainScan = {
 	},
 
 	clearoldmists : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		t.OldMists = [];
 		t.saveoldmists();
 	},
 
 	savelastsearch : function (){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var serverID = getServerId();
 		setTimeout(function () { GM_setValue ('LastSearch_'+serverID+'_'+uW.tvuid, JSON2.stringify(t.LastSearch)); },0); // get around GM_SetValue uW error
 	},
 
 	readlastsearch : function (notify) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var serverID = getServerId();
 		s = GM_getValue ('LastSearch_'+serverID+'_'+uW.tvuid);
 		if (s != null){
@@ -322,14 +322,14 @@ Tabs.DomainScan = {
 	},
 
 	clearlastsearch : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		ById('pbsavedsearch').innerHTML = "&nbsp;";
 		t.LastSearch = {};
 		t.savelastsearch();
 	},
 
 	showlastsearch : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (t.searchRunning){
 			t.stopSearch (tx('Search Cancelled!'));
 		}
@@ -353,7 +353,7 @@ Tabs.DomainScan = {
 	},
 
 	displaylastsearch : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		n = tx("Previous Search")+' ('+uW.formatDate(uWCloneInto(new Date(t.LastSearch.time * 1000)), "NNN dd, HH:mm")+')&nbsp;<INPUT id=pbshowlastsearch class=btInput type=submit value="'+tx('Show')+'"/>&nbsp;<INPUT id=pbclearlastsearch class=btInput type=submit value="'+tx("Clear")+'"/>';
 		ById('pbsavedsearch').innerHTML = n;
 		ById('pbclearlastsearch').addEventListener('click', t.clearlastsearch, false);
@@ -361,7 +361,7 @@ Tabs.DomainScan = {
 	},
 
 	clickedSearchAura : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (t.searchRunning){ t.stopSearch (''); }
 		ById('pbSearchX').value = Seed.allianceHQ.hq_xcoord;
 		ById('pbSearchY').value = Seed.allianceHQ.hq_ycoord;
@@ -371,7 +371,7 @@ Tabs.DomainScan = {
 	},
 
 	clickedSearch : function (){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		if (t.searchRunning){
 			t.stopSearch (tx('Search Cancelled!'),true);
@@ -457,7 +457,7 @@ Tabs.DomainScan = {
 	},
 
 	setupResultsPanel : function (Previous) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (t.FilterShow) {
 			var FilterDisp = '';
 			var ResultWidth = GlobalOptions.btWinSize.x-155;
@@ -580,7 +580,7 @@ Tabs.DomainScan = {
 	},
 
 	MinLevelChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchMinLevel');
 		if (isNaN(e.value)) { e.value = ''; }
@@ -590,7 +590,7 @@ Tabs.DomainScan = {
 	},
 
 	MaxLevelChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchMaxLevel');
 		if (isNaN(e.value)) { e.value = ''; }
@@ -600,7 +600,7 @@ Tabs.DomainScan = {
 	},
 
 	MinMightChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchMinMight');
 		if (isNaN(e.value)) { e.value = ''; }
@@ -610,7 +610,7 @@ Tabs.DomainScan = {
 	},
 
 	MaxMightChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchMaxMight');
 		if (isNaN(e.value)) { e.value = ''; }
@@ -620,7 +620,7 @@ Tabs.DomainScan = {
 	},
 
 	SearchRankChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchRank');
 		if (isNaN(e.value)) { e.value = ''; }
@@ -634,7 +634,7 @@ Tabs.DomainScan = {
 	},
 
 	SearchAllNameChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchAllName');
 		Options.SearchOptions.AllianceName = e.value;
@@ -643,7 +643,7 @@ Tabs.DomainScan = {
 	},
 
 	SearchPlayerNameChange : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (KeyTimer) { clearTimeout(KeyTimer); }
 		var e = ById('pbSearchPlayerName');
 		Options.SearchOptions.PlayerName = e.value;
@@ -652,7 +652,7 @@ Tabs.DomainScan = {
 	},
 
 	setupFilterDisplay : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		var stype = Options.SearchOptions.SearchType;
 
@@ -737,7 +737,7 @@ Tabs.DomainScan = {
 	},
 
 	ToggleSearchFilters : function (){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		t.FilterShow = !t.FilterShow;
 		var div = ById('pbSearchFilterContainer');
 		if (div.style.display == 'none'){
@@ -753,7 +753,7 @@ Tabs.DomainScan = {
 	},
 
 	AllianceRankings : function (rank, type, callback, page, prop) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if(parseIntNan(rank)==0) return;
 		var limit = rank-1;
 		if (type==0) { // above, so include passed rank
@@ -782,7 +782,7 @@ Tabs.DomainScan = {
 	},
 
 	eventGetPlayerOnline : function (blockString, rslt){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (!t.searchRunning) { return; }
 		if (!rslt.ok) {
 			if (rslt.BotCode && rslt.BotCode==999) { // map captcha
@@ -809,7 +809,7 @@ Tabs.DomainScan = {
 	},
 
 	mapCallback : function (uList){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		var rslt = t.SearchList;
 		var map = rslt.data;
@@ -914,7 +914,7 @@ Tabs.DomainScan = {
 	},
 
 	LookupMists : function (prov,notify) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		t.KMData = [];
 
 		if (!KOCMON_ON) return;
@@ -965,10 +965,10 @@ Tabs.DomainScan = {
 	},
 
 	dispMapTable : function (){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		function sortFunc(a, b) {
-			var t = Tabs.Search;
+			var t = Tabs.DomainScan;
 			if (typeof (a[Options.SearchOptions.sortColNum]) == 'number') {
 				if (Options.SearchOptions.sortDir > 0)
 					return a[Options.SearchOptions.sortColNum] - b[Options.SearchOptions.sortColNum];
@@ -1199,8 +1199,8 @@ Tabs.DomainScan = {
 						m += '<TD '+rowStyle+' class=xtab nowrap colspan=4 id=pbsrch_'+t.dat[i][0]+'_'+t.dat[i][1]+'><center>*** '+mistedtext+' ***&nbsp;&nbsp;<SPAN onclick="quickscoutsearch('+ t.dat[i][0] +','+ t.dat[i][1] +','+t.ModelCityId+');return false;"><A class=xlink>'+tx("QuickScout")+'</a></span></center></td>';
 						if (ById('pbAutoQS')) {
 							if (ById('pbAutoQS').checked) {
-								if (!Tabs.Search.QSMarching[t.dat[i][0]+'_'+t.dat[i][1]] || Tabs.Search.QSMarching[t.dat[i][0]+'_'+t.dat[i][1]]==0) {
-									Tabs.Search.QSMarching[t.dat[i][0]+'_'+t.dat[i][1]] = 1;
+								if (!Tabs.DomainScan.QSMarching[t.dat[i][0]+'_'+t.dat[i][1]] || Tabs.DomainScan.QSMarching[t.dat[i][0]+'_'+t.dat[i][1]]==0) {
+									Tabs.DomainScan.QSMarching[t.dat[i][0]+'_'+t.dat[i][1]] = 1;
 									setTimeout(uW.quickscoutsearch,(5000*qsdelay),t.dat[i][0],t.dat[i][1],t.ModelCityId,true);
 									qsdelay = qsdelay + 1;
 								}
@@ -1232,7 +1232,7 @@ Tabs.DomainScan = {
 	},
 
 	ShowHQMembers : function (elem,hqId) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var params = uW.Object.clone(uW.g_ajaxparams);
 		params.hqId = hqId;
 		new MyAjaxRequest(uW.g_ajaxpath + "ajax/allianceHqMineOpen.php" + uW.g_ajaxsuffix, {
@@ -1259,7 +1259,7 @@ Tabs.DomainScan = {
 	},
 
 	updateMistProgress : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		if (!t.searchRunning) {
 			if (t.mists!=0) {
 				ById('pbStatSearched').innerHTML = tx('Mists Scouted: ')+ t.scouted+'/'+t.mists;
@@ -1271,7 +1271,7 @@ Tabs.DomainScan = {
 	},
 
 	doSelectall: function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var coords = "";
 		for (var k = 0; k < t.dat.length; k++) {
 			coords = t.dat[k][0]+'_'+t.dat[k][1];
@@ -1281,7 +1281,7 @@ Tabs.DomainScan = {
 	},
 
 	stopSearch : function (msg,savelast){
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		MAP_DELAY_WATCH = 0;
 		clearTimeout (t.SearchTimer);
@@ -1321,7 +1321,7 @@ Tabs.DomainScan = {
 	},
 
 	ExportScoutList : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var coordlist = t.getSelected();
 		if (coordlist != "") {
 			Tabs.BulkScout.ImportCoords(coordlist.split(" "));
@@ -1329,7 +1329,7 @@ Tabs.DomainScan = {
 	},
 
 	ExportAttackList : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var coordlist = t.getSelected();
 		if (coordlist != "") {
 			Tabs.BulkAttack.ImportCoords(coordlist.split(" "));
@@ -1337,7 +1337,7 @@ Tabs.DomainScan = {
 	},
 
 	getSelected : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var coordlist = "";
 		var coords = "";
 		for (var k = 0; k < t.dat.length; k++) {
@@ -1351,7 +1351,7 @@ Tabs.DomainScan = {
 	},
 
 	ExportAttack : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		var sel = false;
 		for (var k = 0; k < t.dat.length; k++) {
@@ -1369,7 +1369,7 @@ Tabs.DomainScan = {
 	},
 
 	CopyCoords : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var CoordList = [];
 		var coords = "";
 		for (var k = 0; k < t.dat.length; k++) {
@@ -1384,7 +1384,7 @@ Tabs.DomainScan = {
 	},
 
 	HighlightDefenders : function () {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 
 		var delayer = 0;
 		ById('pbHighDefenders').outerHTML = '<span id=pbHighDefendersProg>&nbsp;</span>';
@@ -1410,7 +1410,7 @@ Tabs.DomainScan = {
 	},
 
 	UpdateDefendStatus : function (rslt,x,y,k) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		t.ReqSent[x+'_'+y]=0;
 		var div = ById('search_'+x+'_'+y);
 		var coords = t.dat[k][0]+'_'+t.dat[k][1];
@@ -1433,7 +1433,7 @@ Tabs.DomainScan = {
 	},
 
 	show: function (init) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		var DispCityId = uW.currentcityid;
 		if (init) { DispCityId = InitialCityId; }
 		if (t.ModelCityId!=DispCityId) {
