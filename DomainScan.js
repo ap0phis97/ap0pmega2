@@ -84,7 +84,7 @@ Tabs.DomainScan = {
 // t.dat = filtered subset of above
 
 	init: function (div) {
-		var t = Tabs.Search;
+		var t = Tabs.DomainScan;
 		t.myDiv = div;
 
 		if (!Options.SearchOptions) {
@@ -98,9 +98,9 @@ Tabs.DomainScan = {
 			}
 		}
 
-		uWExportFunction('ptsearchClickSort', Tabs.Search.searchClickSort);
-		uWExportFunction('searchquickmarch', Tabs.Search.searchquickmarch);
-		uWExportFunction('btShowHQMembers', Tabs.Search.ShowHQMembers);
+		uWExportFunction('ptsearchClickSort', Tabs.DomainScan.searchClickSort);
+		uWExportFunction('searchquickmarch', Tabs.DomainScan.searchquickmarch);
+		uWExportFunction('btShowHQMembers', Tabs.DomainScan.ShowHQMembers);
 
 		var m = '<DIV class=divHeader align="center">'+tx('MAP SEARCH')+'</div>';
 		m += '<TABLE width=100% class=xtab><TR style="height:25px;"><td colspan=2>';
