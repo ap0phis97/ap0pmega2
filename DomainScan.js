@@ -1,7 +1,5 @@
-/** Search Tab **/
-// version 1.1
 Tabs.Search = {
-	tabOrder: 2020,
+	tabOrder: 1020,
 	tabLabel: 'Domain Scan',
 	myDiv: null,
 	MapAjax : new CMapAjax(),
@@ -109,7 +107,7 @@ Tabs.Search = {
 		if (ArcanaEnabled()) {
 			m += '<a class=xlink id=pbSearchAura>&nbsp;'+tx('Search HQ Arcane Aura')+'</a>';
 		}
-		m += '</td><td colspan=2 align=right id=pbsavedsearch>&nbsp;</td></tr><tr><TD align=right width=20%>'+tx('Enter 375 for coords & Radius')+':&nbsp;</td><TD colspan=3>X:&nbsp;<INPUT id=pbSearchX type=text\> &nbsp;Y:&nbsp;<INPUT id=pbSearchY type=text\>';
+		m += '</td><td colspan=2 align=right id=pbsavedsearch>&nbsp;</td></tr><tr><TD align=right width=20%>'+tx('Search Coords')+':&nbsp;</td><TD colspan=3>X:&nbsp;<INPUT id=pbSearchX type=text\> &nbsp;Y:&nbsp;<INPUT id=pbSearchY type=text\>';
 		m += '&nbsp;&nbsp;'+tx("Radius")+':&nbsp;<INPUT id=pbSearchDist size=3 value=10 />';
 		m += '&nbsp;&nbsp;<SPAN id=pbSearchCitySpan></span></td></tr>';
 		m += '<TR><TD align=right>'+tx('Or Search')+':&nbsp;</td><TD colspan=2><select id="pbSearchProvince"><option value=0>-- '+uW.g_js_strings.commonstr.province+' --</option>';
@@ -177,7 +175,7 @@ Tabs.Search = {
 			t.setSlice();
 		});
 
-		ById('pb Dist').addEventListener ('keydown', t.e_coordChange, false);
+		ById('pbSearchDist').addEventListener ('keydown', t.e_coordChange, false);
 		ById('pbSearchX').addEventListener ('keydown', t.e_coordChange, false);
 		ById('pbSearchY').addEventListener ('keydown', t.e_coordChange, false);
 		ById('pbSearchY').addEventListener ('change', t.e_coordChange, false);
