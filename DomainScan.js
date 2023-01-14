@@ -1,7 +1,7 @@
 /** Search Tab **/
 
 Tabs.DomainScan = {
-	tabOrder: 1020,
+	tabOrder: 2020,
 	tabLabel: 'Search',
 	myDiv: null,
 	MapAjax : new CMapAjax(),
