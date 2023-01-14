@@ -1,5 +1,5 @@
 /** Search Tab **/
-
+// version 1.1
 Tabs.Search = {
 	tabOrder: 2020,
 	tabLabel: 'Domain Scan',
